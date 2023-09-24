@@ -15,6 +15,16 @@ REQUIREMENTS
 - setup the DB: rails db:create rails db:migrate
 - open the server: rails server
 
+## HTTP status codes and their meanings:
+
+- 200 OK: The request was successful.
+- 422 :unprocessable_entity The request was well-formed but was unable to be followed due to semantic errors.
+- 400 Bad Request: The request is malformed or invalid.
+- 401 Unauthorized: Authentication is required or has failed.
+- 403 Forbidden: The client does not have permission to access the resource.
+- 404 Not Found: The requested resource could not be found.
+- 500 Internal Server Error: An unexpected server error occurred.
+
 
 ## ENDPOINTS:
 - GET /books: Retrieve a list of all books.
