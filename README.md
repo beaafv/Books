@@ -37,7 +37,7 @@ A book entry should include the following attributes:
 - title (string): The title of the book.
 - author (string): The author of the book.
 - genre (string): The genre of the book.
-- publication_year (string or date): The publication year of the book.
+- publication_year (date): The publication year of the book.
 
 ## Book Query
 You can query books using the /books/query endpoint by providing a search string for the query parameter.
