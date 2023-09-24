@@ -1,8 +1,8 @@
 # README
-
+# Book Recomendations API
 This is a simple API for managing and querying book recommendations. Team members can use this API to add books to a shared list and search for books based on specific parameters.
 
-REQUIREMENTS
+## Prerequisites
 
 - Ruby 3.1
 - Ruby on Rails 7.0
@@ -43,5 +43,7 @@ A book entry should include the following attributes:
 You can query books using the /books/query endpoint by providing a search string for the query parameter.
 The API will search for books that match the title, author, genre, or publication year based on the provided query string.
 
-Run $ RSPEC to run tests in the terminal 
+## Running Tests
+To run all the tests, navigate to the project root and execute the following: 
+- $ rspec
 
