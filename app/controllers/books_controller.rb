@@ -3,6 +3,7 @@
 class BooksController < ApplicationController
   def index
     @books = Book.all
+    # convert ruby object into json format as the body of the HTTP
     render json: @books, status: :ok
   end
 
@@ -21,14 +22,15 @@ class BooksController < ApplicationController
 
   def query
     query_string = "%#{params[:query]}%"
+    # case insensitive
     @books = Book.where(
       'title ILIKE :query OR author ILIKE :query OR genre ILIKE :query OR publication_year::text ILIKE :query', query: query_string
-      )
+    )
     render json: @books, status: :ok
   end
 
+  # strong params
   private
-
   def book_params
     params.require(:book).permit(:title, :author, :genre, :publication_year)
   end
