@@ -23,7 +23,7 @@ class BooksController < ApplicationController
     query_string = "%#{params[:query]}%"
     @books = Book.where(
       'title ILIKE :query OR author ILIKE :query OR genre ILIKE :query OR publication_year::text ILIKE :query', query: query_string
-    )
+      )
     render json: @books, status: :ok
   end
 
