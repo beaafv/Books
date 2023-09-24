@@ -1,25 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple API for managing and querying book recommendations. Team members can use this API to add books to a shared list and search for books based on specific parameters.
 
-Things you may want to cover:
+REQUIREMENTS
 
-* Ruby version
+- Ruby 3.1
+- Ruby on Rails 7.0
+- PostgreSQL
 
-* System dependencies
+## Getting started
+- Clone this repository 
+- navigate to the repository
+- install gems - bundle install
+- setup the DB: rails db:create rails db:migrate
+- open the server: rails server
 
-* Configuration
 
-* Database creation
+## ENDPOINTS:
+- GET /books: Retrieve a list of all books.
+- POST /books: Add a new book to the database.
+- GET /books/query: Search for books based on specific parameters (title, author, genre, publication year).
 
-* Database initialization
+## Book Entry
+A book entry should include the following attributes:
 
-* How to run the test suite
+- title (string): The title of the book.
+- author (string): The author of the book.
+- genre (string): The genre of the book.
+- publication_year (string or date): The publication year of the book.
 
-* Services (job queues, cache servers, search engines, etc.)
+#Book Query
+You can query books using the /books/query endpoint by providing a search string for the query parameter.
+The API will search for books that match the title, author, genre, or publication year based on the provided query string.
 
-* Deployment instructions
+Run $ RSPEC to run tests in the terminal 
 
-* ...
-# Books
