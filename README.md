@@ -47,4 +47,6 @@ The API will search for books that match the title, author, genre, or publicatio
 ## Running Tests
 To run all the tests, navigate to the project root and execute the following: 
 - $ rspec
+## Deployed on 
+- https://books-api-cloudwalk-9327532ccf14.herokuapp.com/
 
