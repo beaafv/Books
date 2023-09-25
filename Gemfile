@@ -7,9 +7,8 @@ ruby '3.1.2'
 
 # rspec gem for rails 7
 
-group :development, :test do
   gem 'rspec-rails', '~> 6.0.0'
-end
+
 
 gem 'factory_bot_rails', '~> 6.2'
 
