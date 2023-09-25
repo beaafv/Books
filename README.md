@@ -1,6 +1,7 @@
 # README
 # Book Recomendations API
-This is a simple API for managing and querying book recommendations. Team members can use this API to add books to a shared list and search for books based on specific parameters.
+This is a simple API for managing and querying book recommendations. 
+Team members can use this API to add books to a shared list and search for books based on specific parameters.
 
 ## Prerequisites
 
@@ -18,7 +19,7 @@ This is a simple API for managing and querying book recommendations. Team member
 ## HTTP status codes and their meanings:
 
 - 200 OK: The request was successful.
-- 422 :unprocessable_entity The request was well-formed but was unable to be followed due to semantic errors.
+- 422 unprocessable_entity: The request was well-formed but was unable to be followed due to semantic errors.
 - 400 Bad Request: The request is malformed or invalid.
 - 401 Unauthorized: Authentication is required or has failed.
 - 403 Forbidden: The client does not have permission to access the resource.
@@ -34,7 +35,7 @@ This is a simple API for managing and querying book recommendations. Team member
 ## Book Entry
 A book entry should include the following attributes:
 
-- title (string): The title of the book.
+- title (string): The title of the book. The title must be unique.
 - author (string): The author of the book.
 - genre (string): The genre of the book.
 - publication_year (date): The publication year of the book.
