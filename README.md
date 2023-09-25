@@ -32,7 +32,7 @@ Team members can use this API to add books to a shared list and search for books
 - POST /books: Add a new book to the database.
 - GET /books/query: Search for books based on specific parameters (title, author, genre, publication year).
 
-## Book Entry
+## Book Entry - Adding a book
 A book entry should include the following attributes:
 
 - title (string): The title of the book. The title must be unique.
