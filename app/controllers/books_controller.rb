@@ -7,16 +7,12 @@ class BooksController < ApplicationController
     render json: @books, status: :ok
   end
 
-  def new
-    @book = Book.new
-  end
-
   def create
     @book = Book.create(book_params)
     if @book.save
       render json: @book, status: :created
     else
-      render :new, status: 422
+      render json: {error: @book.errors.full_messages }, status: 422
     end
   end
 

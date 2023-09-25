@@ -26,7 +26,6 @@ RSpec.describe 'Books', type: :request do
   describe 'POST /books' do
     context 'if the user submits a book' do
       it 'should add a book to the list' do
-        create(:book)
         book_params = {
           title: 'New Book Title',
           author: 'New Book Author',
@@ -35,6 +34,7 @@ RSpec.describe 'Books', type: :request do
         }
         # simulating a post request
         post '/books', params: { book: book_params }
+        create(:book)
         expect(response).to have_http_status(:created)
       end
     end
@@ -42,7 +42,6 @@ RSpec.describe 'Books', type: :request do
   describe 'GET/books/query' do
     context 'query by title' do
       it 'returns a book that matches book title' do
-        puts 'creating books'
         book1 = create(:book, title: 'example 1')
         book2 = create(:book, title: 'example2')
         # simulating a get request with title
@@ -50,6 +49,8 @@ RSpec.describe 'Books', type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include(book1.to_json)
         expect(response.body).not_to include(book2.to_json)
+        expect(JSON.parse(response.body)).not_to eq([])
+
       end
     end
 
@@ -85,6 +86,16 @@ RSpec.describe 'Books', type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include(book1.to_json)
         expect(response.body).not_to include(book2.to_json)
+      end
+    end
+    # if the query doesnt match any book
+    context 'when no books match the query' do
+      it 'returns an empty list' do
+        create(:book, title: 'example6')
+        create(:book, title: 'example7')
+        get '/books/query', params: { query: 'not a book' }
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body)).to eq([])
       end
     end
   end
