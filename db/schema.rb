@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_161741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", force: :cascade do |t|
+  create_table 'books', force: :cascade do |t|
     t.string "title"
     t.string "author"
     t.string "genre"
@@ -22,5 +22,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_161741) do
     t.datetime "updated_at", null: false
     t.date "publication_year"
   end
-
 end

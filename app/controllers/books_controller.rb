@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     if @book.save
       render json: @book, status: :created
     else
-      render json: {error: @book.errors.full_messages }, status: 422
+      render json: { error: @book.errors.full_messages }, status: 422
     end
   end
 
@@ -25,8 +25,28 @@ class BooksController < ApplicationController
     render json: @books, status: :ok
   end
 
+  def info
+    render json: {
+      jsonapi: {
+        version: '1.0'
+      },
+      meta: {
+        description: 'This block shows up in the root node of every payload',
+        resources: {
+          "books": "https://books-api-cloudwalk-9327532ccf14.herokuapp.com/books", # endpoint to fetch all books
+          "adding a book": "https://books-api-cloudwalk-9327532ccf14.herokuapp.com/books", # endpoint to add a book via POST
+          "search for books": "https://books-api-cloudwalk-9327532ccf14.herokuapp.com/books/query"
+        }
+      },
+      links: {
+        self: "https://books-api-cloudwalk-9327532ccf14.herokuapp.com"
+      }
+    }
+  end
+
   # strong params
   private
+
   def book_params
     params.require(:book).permit(:title, :author, :genre, :publication_year)
   end
