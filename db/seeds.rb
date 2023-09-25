@@ -6,3 +6,17 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+book1 = Book.create!(
+  title: 'Ensaio sobre a cegueira',
+  genre: 'Romance',
+  author: 'José Saramago',
+  publication_year: '15-05-1995'
+)
+
+book2 = Book.create!(
+  title: 'Memorial do Convento',
+  genre: 'Romance',
+  author: 'José Saramago',
+  publication_year: '15-05-1982'
+)
