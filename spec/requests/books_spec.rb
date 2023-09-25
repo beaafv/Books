@@ -7,8 +7,10 @@ RSpec.describe 'Books', type: :request do
     context 'if there are books on the database' do
       it ' should display all books' do
         create(:book)
+        # get request to fetch all books
         get '/books'
         expect(response).to have_http_status(:ok)
+        # The response body should not be empty
         expect(JSON.parse(response.body)).not_to be_empty
       end
     end
@@ -17,6 +19,7 @@ RSpec.describe 'Books', type: :request do
         # simulating a get request
         get '/books'
         expect(response).to have_http_status(:ok)
+        # the body response should be an empty array if there are no books
         expect(JSON.parse(response.body)).to eq([])
       end
     end
@@ -33,9 +36,15 @@ RSpec.describe 'Books', type: :request do
           publication_year: '2024-01-10'
         }
         # simulating a post request
+        expect {
         post '/books', params: { book: book_params }
-        create(:book)
+        }.to change(Book, :count).by(1)
         expect(response).to have_http_status(:created)
+        expect(JSON.parse(response.body)['title']).to eq('New Book Title')
+        expect(JSON.parse(response.body)['author']).to eq('New Book Author')
+        expect(JSON.parse(response.body)['genre']).to eq('New Book Genre')
+        expect(JSON.parse(response.body)['publication_year']).to eq('2024-01-10')
+
       end
     end
   end
@@ -66,7 +75,7 @@ RSpec.describe 'Books', type: :request do
       end
     end
     context 'query by genre' do
-      it 'returns a book that matches book title' do
+      it 'returns a book that matches book genre' do
         book1 = create(:book, title: 'example2', genre: 'genre 1')
         book2 = create(:book, title: 'example3', genre: 'genre 2')
         # simulating a get request with genre

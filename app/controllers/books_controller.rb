@@ -8,11 +8,11 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.create(book_params)
+    @book = Book.new(book_params)
     if @book.save
       render json: @book, status: :created
     else
-      render json: { error: @book.errors.full_messages }, status: 422
+      render json: { error: @book.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
