@@ -2,8 +2,14 @@
 
 class BooksController < ApplicationController
   def index
-    @books = Book.all
-    # convert ruby object into json format as the body of the HTTP
+    if params[:query].present?
+      query_string = "%#{params[:query]}%"
+      @books = Book.where(
+        'title ILIKE :query OR author ILIKE :query OR genre ILIKE :query OR publication_year::text ILIKE :query', query: query_string
+      )
+    else
+      @books = Book.all
+    end
     render json: @books, status: :ok
   end
 
@@ -16,15 +22,6 @@ class BooksController < ApplicationController
     end
   end
 
-  def query
-    query_string = "%#{params[:query]}%"
-    # case insensitive
-    @books = Book.where(
-      'title ILIKE :query OR author ILIKE :query OR genre ILIKE :query OR publication_year::text ILIKE :query', query: query_string
-    )
-    render json: @books, status: :ok
-  end
-
   def info
     render json: {
       jsonapi: {
@@ -35,7 +32,6 @@ class BooksController < ApplicationController
         resources: {
           "books": "https://books-api-cloudwalk-9327532ccf14.herokuapp.com/books", # endpoint to fetch all books
           "adding a book": "https://books-api-cloudwalk-9327532ccf14.herokuapp.com/books", # endpoint to add a book via POST
-          "search for books": "https://books-api-cloudwalk-9327532ccf14.herokuapp.com/books/query"
         }
       },
       links: {
