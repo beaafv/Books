@@ -55,18 +55,6 @@ RSpec.describe 'Books', type: :request do
         expect(response.body).not_to include(book2.to_json)
       end
     end
-    context 'query by publication_year' do
-      it 'returns a book that matches book publication year' do
-        book1 = create(:book, title: 'example4', publication_year: '2023-08-10')
-        book2 = create(:book, title: 'example5', publication_year: '2023-06-10')
-        # simulating a get request with publication year
-
-        get '/books', params: { query: '2023-08-10' }
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(book1.to_json)
-        expect(response.body).not_to include(book2.to_json)
-      end
-    end
     # if the query doesnt match any book
     context 'when no books match the query' do
       it 'returns an empty list' do
@@ -90,9 +78,7 @@ RSpec.describe 'Books', type: :request do
           publication_year: '2024-01-10'
         }
         # simulating a post request
-        expect {
-          post '/books', params: { book: book_params }
-        }.to change(Book, :count).by(1)
+        expect { post '/books', params: { book: book_params } }.to change(Book, :count).by(1)
         expect(response).to have_http_status(:created)
         expect(parsed_response['title']).to eq('New Book Title')
         expect(parsed_response['author']).to eq('New Book Author')

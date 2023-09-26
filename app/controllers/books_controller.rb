@@ -5,7 +5,7 @@ class BooksController < ApplicationController
     if params[:query].present?
       query_string = "%#{params[:query]}%"
       @books = Book.where(
-        'title ILIKE :query OR author ILIKE :query OR genre ILIKE :query OR publication_year::text ILIKE :query', query: query_string
+        'title ILIKE :query OR author ILIKE :query OR genre ILIKE :query', query: query_string
       )
     else
       @books = Book.all
